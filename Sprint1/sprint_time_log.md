@@ -49,7 +49,7 @@ _Note: Add more rows as needed._
 
 |Category                       |Total Time (Hours:Minutes)|
 |-------------------------------|:------------------------:|
-|IM - Individual Module         | Need 2.5 more hours since 10/02/26   |
+|IM - Individual Module         |         10               |
 |TP - Team Project              |         3.5              |
 |MTG - Class Meetings           |        5:00              |
-|**TOTAL**                      |                          |
+|**TOTAL**                      |        18.5              |
