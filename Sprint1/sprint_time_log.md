@@ -41,7 +41,8 @@ The expected minimum amount of time each Sprint for each category is as follows:
 | 10/01/26  |   4:00   |   IM   |  Using AI to generate plan and code for db |     200     |
 | 10/02/26  |   10:15  |   MTG  |  Class                                     |     60      |
 | 10/02/26  |   10:45  |   TP   |  Coordinated team project planning         |     30      |
-| 10/02/26  |   12:15  |   IM   |  Cleaning up finished project              |     60
+| 10/02/26  |   12:15  |   IM   |  Cleaning up finished project              |     60      |
+| 10/02/26  |   2:00   |   IM   |  Reviewing code, tweaking                  |     150     |
 _Note: Add more rows as needed._
 
 ## Sprint Totals
