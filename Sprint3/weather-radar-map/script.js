@@ -54,8 +54,6 @@ require([
     
     map.addMany([tempLayer, windLayer, cloudsLayer]);
 
-    const weatherApiKey = "e78738478133c7598b94f856ad537606";
-
     // State, province, and territory capitals not included in the worldwide
     // country-capital dataset below.
     const regionalCapitals = [
@@ -194,6 +192,19 @@ require([
         return directions[Math.round(degrees / 22.5) % 16];
     }
 
+    function weatherCodeDescription(code) {
+        const descriptions = {
+            0: "clear sky", 1: "mainly clear", 2: "partly cloudy", 3: "overcast",
+            45: "fog", 48: "rime fog", 51: "light drizzle", 53: "moderate drizzle",
+            55: "dense drizzle", 61: "slight rain", 63: "moderate rain", 65: "heavy rain",
+            71: "slight snow", 73: "moderate snow", 75: "heavy snow",
+            80: "slight rain showers", 81: "moderate rain showers", 82: "violent rain showers",
+            95: "thunderstorm", 96: "thunderstorm with slight hail", 99: "thunderstorm with heavy hail"
+        };
+
+        return descriptions[code] || "unknown conditions";
+    }
+
     function createTemperatureBubbleSymbol(temperature) {
         // The SVG tail ends at the city coordinate while the bubble sits above it.
         const bubbleSvg = `
@@ -216,9 +227,8 @@ require([
         };
     }
 
-    // OpenWeather rate-limits the free weather endpoint. Queue requests and
-    // keep them below the usual 60-requests-per-minute limit.
-    const weatherRequestInterval = 1100;
+    // Queue requests so the public weather service is not overwhelmed.
+    const weatherRequestInterval = 100;
     let lastWeatherRequestAt = 0;
     let weatherRequestQueue = Promise.resolve();
 
@@ -244,6 +254,37 @@ require([
         return request;
     }
 
+    function createUnavailableWeatherGraphic(city) {
+        return new Graphic({
+            geometry: {
+                type: "point",
+                longitude: city.lon,
+                latitude: city.lat
+            },
+            symbol: createTemperatureBubbleSymbol("—"),
+            attributes: {
+                City: city.name,
+                Country: city.country,
+                Region: city.region,
+                CapitalType: city.type,
+                Temperature: "Unavailable",
+                Conditions: "Weather data unavailable",
+                WindSpeed: "Unavailable",
+                WindDirection: "Unavailable"
+            },
+            popupTemplate: {
+                title: "{City}",
+                content: `
+                    <b>Country:</b> {Country}<br>
+                    <b>Region:</b> {Region}<br>
+                    <b>Type:</b> {CapitalType}<br>
+                    <b>Temperature:</b> {Temperature}<br>
+                    <b>Conditions:</b> {Conditions}
+                `
+            }
+        });
+    }
+
     async function updateTemperatureMarkers() {
         if (cities.length === 0) {
             // Seed the list immediately so regional markers remain available even
@@ -253,15 +294,30 @@ require([
             console.log(`Loaded ${cities.length} capital cities.`);
         }
 
+        // Render bubbles immediately while live weather requests are queued.
+        graphicsLayer.removeAll();
+        graphicsLayer.addMany(cities.map(createUnavailableWeatherGraphic));
+
         const graphics = await Promise.all(
             cities.map(async city => {
                 try {
-                const url =
-                    `https://api.openweathermap.org/data/2.5/weather` +
-                    `?lat=${city.lat}&lon=${city.lon}` +
-                    `&units=imperial&appid=${weatherApiKey}`;
+                    const url =
+                        `https://api.open-meteo.com/v1/forecast` +
+                        `?latitude=${city.lat}&longitude=${city.lon}` +
+                        `&current=temperature_2m,weather_code,wind_speed_10m,wind_direction_10m` +
+                        `&temperature_unit=fahrenheit&wind_speed_unit=mph&timezone=auto`;
 
-                const weather = await requestWeather(url);
+                    const weatherResponse = await requestWeather(url);
+                    const current = weatherResponse.current;
+                    // Normalize Open-Meteo's response to the fields used below.
+                    const weather = {
+                        main: { temp: current.temperature_2m },
+                        weather: [{ description: weatherCodeDescription(current.weather_code) }],
+                        wind: {
+                            speed: current.wind_speed_10m,
+                            deg: current.wind_direction_10m
+                        }
+                    };
 
                 return new Graphic({
                     geometry: {
@@ -295,7 +351,7 @@ require([
                 });
                 } catch (error) {
                     console.warn(`Could not load weather for ${city.name}.`, error);
-                    return null;
+                    return createUnavailableWeatherGraphic(city);
                 }
             })
         );
@@ -306,8 +362,7 @@ require([
 
 updateTemperatureMarkers();
 
-// With hundreds of capital cities, refreshing every six hours stays within
-// the typical free-tier daily request allowance.
+// Refresh current conditions every six hours.
 setInterval(updateTemperatureMarkers, 21600000);
 
     cloudsLayer.when(
