@@ -35,7 +35,7 @@ The expected minimum amount of time each Sprint for each category is as follows:
 | 10/28/26 |  7:10    | IM     |  Tutorial then working on actual project   |     180     |
 | 10/29/26 |  1:20    | IM     |  Adding markers                            |     60      |
 | 10/30/26 |  10:15   | MTG    |  Class                                     |     60      |
-| 10/31/26 |  9:00    | IM     |  Final touch-ups                           |     
+| 10/31/26 |  9:00    | IM     |  Final touch-ups                           |     120      |
 
 
 
@@ -47,7 +47,7 @@ _Note: Add more rows as needed._
 
 |Categroy                       |Total Time (Hours:Minutes)|
 |-------------------------------|:------------------------:|
-|IM - Individual Module         |                          |
+|IM - Individual Module         |        7:00              |
 |TP - Team Project              |        3:30              |
 |MTG - Class Meetings           |        3:00              |
-|**TOTAL**                      |                          |
+|**TOTAL**                      |        13:30             |
