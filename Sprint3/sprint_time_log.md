@@ -50,4 +50,4 @@ _Note: Add more rows as needed._
 |IM - Individual Module         |        7:00              |
 |TP - Team Project              |        3:30              |
 |MTG - Class Meetings           |        3:00              |
-|**TOTAL**                      |                          |
+|**TOTAL**                      |        13:30             |
