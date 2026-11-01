@@ -1,8 +1,8 @@
 # CSE 310 - Sprint Time Log
 
-Name:
+Name: Alyssa McBride
 
-Sprint #:
+Sprint #:3
 
 ## Instructions
 
@@ -15,7 +15,7 @@ For the Category column, record one of the following:
 
 The expected minimum amount of time each Sprint for each category is as follows:
 
-|Categroy                       |Total Time (Hours:Minutes)|
+|Category                       |Total Time (Hours:Minutes)|
 |-------------------------------|:------------------------:|
 |IM - Individual Module         |          10:00           |
 |TP - Team Project              |           4:00           |
@@ -30,9 +30,12 @@ The expected minimum amount of time each Sprint for each category is as follows:
 | 10/21/26 |  10:15   | MTG    |  Class                                     |     60      |
 | 10/21/26 |  10:15   | TP     |  Worked on team project                    |     60      |
 | 10/27/26 |  4:00    | TP     |  Worked on team project on Teams           |     60      |
-| 10/27/26 |  7:10    | TP     |  Worked on goals page on my own time       |     85      |
+| 10/27/26 |  7:10    | TP     |  Worked on goals page on my own time       |     90      |
 | 10/28/26 |  10:15   | MTG    |  Class                                     |     60      |
 | 10/28/26 |  7:10    | IM     |  Tutorial then working on actual project   |     180     |
+| 10/29/26 |  1:20    | IM     |  Adding markers                            |     60      |
+| 10/30/26 |  10:15   | MTG    |  Class                                     |     60      |
+| 10/31/26 |  9:00    | IM     |  Final touch-ups                           |     
 
 
 
@@ -45,6 +48,6 @@ _Note: Add more rows as needed._
 |Categroy                       |Total Time (Hours:Minutes)|
 |-------------------------------|:------------------------:|
 |IM - Individual Module         |                          |
-|TP - Team Project              |                          |
-|MTG - Class Meetings           |                          |
+|TP - Team Project              |        3:30              |
+|MTG - Class Meetings           |        3:00              |
 |**TOTAL**                      |                          |
