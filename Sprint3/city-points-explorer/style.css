@@ -1,0 +1,17 @@
+html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      font-family: Arial, sans-serif;
+    }
+    #app-title {
+      padding: 10px;
+      background: #1d3557;
+      color: white;
+      font-size: 20px;
+    }
+    #viewDiv {
+      height: calc(100% - 40px);
+      width: 100%;
+    }
